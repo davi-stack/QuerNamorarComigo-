@@ -1,38 +1,28 @@
-const naoButton = document.getElementById('naoButton');
-const simButton = document.getElementById('simButton');
-const mensagem = document.getElementById('mensagem');
+const noButton = document.getElementById('noButton');
+const yesButton = document.getElementById('yesButton');
+const message = document.getElementById('message');
 
-naoButton.addEventListener('mouseenter', () => {
-    moveButtonRandomly();
-});
+noButton.addEventListener('click', moveButtonRandomly);
+noButton.addEventListener('touchstart', moveButtonRandomly);
 
 function moveButtonRandomly() {
-    const maxX = window.innerWidth - naoButton.clientWidth;
-    const maxY = window.innerHeight - naoButton.clientHeight;
+    // Use viewport height and width to keep button within screen bounds
+    const maxX = window.innerWidth - noButton.clientWidth;
+    const maxY = window.innerHeight - noButton.clientHeight;
 
-    naoButton.style.transition = 'none';
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
 
-    const jumpX = Math.random() * maxX;
-    const jumpY = Math.random() * maxY;
-
-    naoButton.style.transform = `translate(${jumpX}px, ${jumpY}px)`;
-
-    setTimeout(() => {
-        moveButtonRandomly();
-    }, 100);
+    noButton.style.position = 'fixed';
+    noButton.style.left = `${randomX}px`;
+    noButton.style.top = `${randomY}px`;
 }
 
-naoButton.addEventListener('mouseleave', () => {
-    naoButton.style.transition = 'transform 0.5s ease-in-out';
-});
-
-simButton.addEventListener('click', () => {
-    simButton.classList.add('button-animation');
+yesButton.addEventListener('click', () => {
+    yesButton.classList.add('button-animation');
     setTimeout(() => {
-        simButton.classList.remove('button-animation');
-        mensagem.textContent = 'Parabéns pela sua escolha, você vai ser muito feliz!';
-        mensagem.classList.remove('hidden');
+        yesButton.classList.remove('button-animation');
+        message.textContent = 'Parabéns pela sua escolha, você vai ser muito feliz!';
+        message.classList.remove('hidden');
     }, 500);
 });
-
-
